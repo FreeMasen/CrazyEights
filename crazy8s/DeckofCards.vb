@@ -1,14 +1,20 @@
 ﻿Public Class DeckofCards
     Inherits CollectionBase
 
+    Public Function getRandom() As Integer
+        Dim generator As System.Random = New System.Random()
+        Return generator.Next(Me.Count)
+    End Function
+
     Public Sub build(newCard As Card)
-        Me.List.Add(newCard)
+
+        Me.List.Insert(getRandom, newCard)
+
     End Sub
 
     Public Sub deal(deltCard As Card)
         Me.List.Remove(deltCard)
     End Sub
-
 
     Default Public Property Item(index As Integer) As Card
         Get

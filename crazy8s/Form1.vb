@@ -5,11 +5,6 @@
     Dim playerNumber2 As New player
     Dim upCard As Card
 
-    Public Function getRandom(ByVal min As Integer, ByRef max As Integer) As Integer
-        Dim generator As System.Random = New System.Random()
-        Return generator.Next(0, objDeckOfCards.Count)
-    End Function
-
     Private Sub betweenTurns()
         lblP1Hand.Visible = False
         LstP1.Visible = False
@@ -67,22 +62,24 @@
 
         objDeckOfCards.build(addedCard)
     End Sub
-    Private Function shuffle() As DeckofCards
+    Private Sub CreateDeck()
         Dim suits As Array = {"Clubs", "Spades", "Diamonds", "Hearts"}
 
         For Each suit In suits
-            For i As Integer = 0 To 12
-                i += 1
+            For i As Integer = 1 To 13
                 buildDeck(i, suit.ToString)
             Next
         Next
 
-    End Function
+    End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         betweenTurns()
         player = 1
-
+        CreateDeck()
+        For Each item In objDeckOfCards
+            LstP1.Items.Add(item.ToString)
+        Next
 
     End Sub
 
