@@ -3,7 +3,6 @@
 
     'array of suits for the contructor to pull from
     Public suits As Array = {"Hearts", "Diamonds", "Clubs", "Spades"}
-    Public r As Random = New Random
 
     'constructor to create a deck of 52 cards 
     Public Sub New()
@@ -26,17 +25,19 @@
     End Sub
 
     Public Function deal() As Card
+        Static Dim r As Random = New Random
+
         'define a card to be delt
         Dim deltcard As Card
         'choose that card randomly from the existing deck
         deltcard = CType(Me.List.Item(0), Card)
         'return that card
-        Return deltcard
+        Return CType(deltcard, Card)
         'removes a card from the collection
-
         List.RemoveAt(Convert.ToInt32(r))
 
     End Function
+
 
     'defines how to get and set an item based on an index number
     Default Public Property Item(index As Integer) As Card

@@ -1,7 +1,7 @@
 ﻿Public Class Form1
     Dim GameDeck As New DeckofCards
     Dim PlayerNumber1 As New player
-    Dim playerNumber2 As New player
+    Dim PlayerNumber2 As New player
     Dim upCard As Card
 
     Private Sub betweenTurns()
@@ -18,7 +18,7 @@
         btnP2Pass.Visible = False
         btnP2Play.Visible = False
         PlayerNumber1.turn = False
-        playerNumber2.turn = False
+        PlayerNumber2.turn = False
     End Sub
     Private Sub player1()
         PlayerNumber1.turn = True
@@ -38,7 +38,7 @@
         btnNextPlayer.Text = "Start player 2's Turn"
     End Sub
     Private Sub player2()
-        playerNumber2.turn = True
+        PlayerNumber2.turn = True
         lblP1Hand.Visible = False
         LstP1.Visible = False
         btnP1Draw.Visible = False
@@ -54,30 +54,26 @@
         btnP2Play.Visible = True
         btnNextPlayer.Text = "Start player 1's Turn"
     End Sub
-
-    Private Sub Deal()
-        For i As Integer = 0 To 6
-            PlayerNumber1.AcceptDeal(GameDeck.deal())
-            PlayerNumber1.AcceptDeal(GameDeck.deal())
-        Next
-        upCard = GameDeck.deal()
-    End Sub
-
     Private Sub updateLsts()
         LstP1.Items.Clear()
         lstP2.Items.Clear()
         For Each Card In GameDeck
             LstP1.Items.Add(Card)
         Next
-        For Each Card In playerNumber2.hand
+        For Each Card In PlayerNumber2.hand
             lstP2.Items.Add(Card)
         Next
         txtUpCard.Text = upCard.ToString
-        lblP1Hand.Text = GameDeck.Count.ToString
+    End Sub
+    Private Sub Deal()
+        For i As Integer = 0 To 6
+            PlayerNumber1.AcceptDeal(GameDeck.deal)
+            PlayerNumber2.AcceptDeal(GameDeck.deal)
+        Next
     End Sub
 
     Private Sub setUpCard()
-        upCard = GameDeck.deal()
+        upCard = GameDeck.deal
         updateLsts()
 
     End Sub
@@ -86,7 +82,7 @@
         For Each Card In GameDeck
             LstP1.Items.Add(Card)
         Next
-        setUpCard()
+        PlayerNumber2.DrawCard(GameDeck.deal)
     End Sub
 
     Private Sub btnNextPlayer_Click(sender As Object, e As EventArgs) Handles btnNextPlayer.Click
