@@ -1,6 +1,5 @@
 ﻿Public Class Form1
-    Dim player As Integer
-    Dim objDeckOfCards As New DeckofCards
+    Dim GameDeck As New DeckofCards
     Dim PlayerNumber1 As New player
     Dim playerNumber2 As New player
     Dim upCard As Card
@@ -18,9 +17,11 @@
         btnP2Draw.Visible = False
         btnP2Pass.Visible = False
         btnP2Play.Visible = False
+        PlayerNumber1.turn = False
+        playerNumber2.turn = False
     End Sub
     Private Sub player1()
-        player = 2
+        PlayerNumber1.turn = True
         lblP1Hand.Visible = True
         LstP1.Visible = True
         btnP1Draw.Visible = True
@@ -34,10 +35,10 @@
         btnP2Draw.Visible = False
         btnP2Pass.Visible = False
         btnP2Play.Visible = False
-        btnNextPlayer.Text = "Start player" & player & "'s Turn"
+        btnNextPlayer.Text = "Start player 2's Turn"
     End Sub
     Private Sub player2()
-        player = 1
+        playerNumber2.turn = True
         lblP1Hand.Visible = False
         LstP1.Visible = False
         btnP1Draw.Visible = False
@@ -51,44 +52,45 @@
         btnP2Draw.Visible = True
         btnP2Pass.Visible = True
         btnP2Play.Visible = True
-        btnNextPlayer.Text = "Start player " & player & "'s Turn"
+        btnNextPlayer.Text = "Start player 1's Turn"
     End Sub
 
-    Private Sub buildDeck(cardvalue As Integer, suit As String)
-        Dim addedCard As Card
-
-        addedCard.cardValue = cardvalue
-        addedCard.suit = suit
-
-        objDeckOfCards.build(addedCard)
-    End Sub
-    Private Sub CreateDeck()
-        Dim suits As Array = {"Clubs", "Spades", "Diamonds", "Hearts"}
-
-        For Each suit In suits
-            For i As Integer = 1 To 13
-                buildDeck(i, suit.ToString)
-            Next
+    Private Sub Deal()
+        For i As Integer = 0 To 6
+            PlayerNumber1.AcceptDeal(GameDeck.deal())
+            PlayerNumber1.AcceptDeal(GameDeck.deal())
         Next
+        upCard = GameDeck.deal()
+    End Sub
+
+    Private Sub updateLsts()
+        LstP1.Items.Clear()
+        lstP2.Items.Clear()
+        For Each Card In GameDeck
+            LstP1.Items.Add(Card)
+        Next
+        For Each Card In playerNumber2.hand
+            lstP2.Items.Add(Card)
+        Next
+        txtUpCard.Text = upCard.ToString
+        lblP1Hand.Text = GameDeck.Count.ToString
+    End Sub
+
+    Private Sub setUpCard()
+        upCard = GameDeck.deal()
+        updateLsts()
 
     End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        betweenTurns()
-        player = 1
-        CreateDeck()
-        For Each item In objDeckOfCards
-            LstP1.Items.Add(item.ToString)
+        For Each Card In GameDeck
+            LstP1.Items.Add(Card)
         Next
-
+        setUpCard()
     End Sub
 
     Private Sub btnNextPlayer_Click(sender As Object, e As EventArgs) Handles btnNextPlayer.Click
-        If player = 1 Then
-            player1()
-        ElseIf player = 2 Then
-            player2()
-        End If
+
     End Sub
 
     Private Sub btnP1Play_Click(sender As Object, e As EventArgs) Handles btnP1Play.Click

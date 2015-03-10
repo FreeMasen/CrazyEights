@@ -1,21 +1,44 @@
 ﻿Public Class DeckofCards
     Inherits CollectionBase
 
-    Public Function getRandom() As Integer
-        Dim generator As System.Random = New System.Random()
-        Return generator.Next(Me.Count)
+    'array of suits for the contructor to pull from
+    Public suits As Array = {"Hearts", "Diamonds", "Clubs", "Spades"}
+    Public r As Random = New Random
+
+    'constructor to create a deck of 52 cards 
+    Public Sub New()
+        'for each suit in suits
+        For Each x In suits
+            'for each number from 1 to 13
+            For i As Integer = 1 To 13
+                'create a card with that number and that suit
+                Build(i, CStr(x))
+            Next
+        Next
+    End Sub
+
+    Public Sub Build(cardValue As Integer, suit As String)
+        Dim NewCard As Card
+        NewCard.cardValue = cardValue
+        NewCard.suit = suit
+        'adds a new card to the collection
+        Me.List.Add(NewCard)
+    End Sub
+
+    Public Function deal() As Card
+        'define a card to be delt
+        Dim deltcard As Card
+        'choose that card randomly from the existing deck
+        deltcard = CType(Me.List.Item(0), Card)
+        'return that card
+        Return deltcard
+        'removes a card from the collection
+
+        List.RemoveAt(Convert.ToInt32(r))
+
     End Function
 
-    Public Sub build(newCard As Card)
-
-        Me.List.Insert(getRandom, newCard)
-
-    End Sub
-
-    Public Sub deal(deltCard As Card)
-        Me.List.Remove(deltCard)
-    End Sub
-
+    'defines how to get and set an item based on an index number
     Default Public Property Item(index As Integer) As Card
         Get
             Return CType(Me.List.Item(index), Card)
