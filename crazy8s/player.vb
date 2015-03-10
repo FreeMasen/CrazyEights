@@ -1,5 +1,5 @@
 ﻿Public Class player
-    Public hand As ArrayList
+    Public hand As New ArrayList
     Public drawCount As Integer
     Public playerTurn As Boolean
 
@@ -23,18 +23,14 @@
         'Add a card to the player's hand
         Me.hand.Add(DrawnCard)
         drawCount = drawCount + 1
-        If drawCount = 3 Then
-            turn = False
-            drawCount = 0
-        End If
     End Sub
 
     Public Sub AcceptDeal(dealtCard As Card)
-        Me.hand.Add(dealtCard)
+        hand.Add(CType(dealtCard, Card))
     End Sub
 
     Public Function PlayCard(CardToPlay As Integer) As Card
-        Return CType(hand.Item(CardToPlay), Card)
-        Me.hand.Remove(CardToPlay)
+        PlayCard = CType(hand.Item(CardToPlay), Card)
+        Me.hand.RemoveAt(CardToPlay)
     End Function
 End Class

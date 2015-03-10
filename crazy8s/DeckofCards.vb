@@ -26,15 +26,12 @@
 
     Public Function deal() As Card
         Static Dim r As Random = New Random
-
-        'define a card to be delt
-        Dim deltcard As Card
-        'choose that card randomly from the existing deck
-        deltcard = CType(Me.List.Item(0), Card)
-        'return that card
-        Return CType(deltcard, Card)
+        Dim cardIndex As Integer
+        cardIndex = r.Next(0, Me.List.Count - 1)
+       
+        deal = CType(Me.List.Item(cardIndex), Card)
         'removes a card from the collection
-        List.RemoveAt(Convert.ToInt32(r))
+        List.RemoveAt(cardIndex)
 
     End Function
 

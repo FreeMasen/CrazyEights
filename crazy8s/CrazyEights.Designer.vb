@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class Form1
+Partial Class CrazyEights
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -37,6 +37,7 @@ Partial Class Form1
         Me.btnNextPlayer = New System.Windows.Forms.Button()
         Me.BtnP1Pass = New System.Windows.Forms.Button()
         Me.btnP2Pass = New System.Windows.Forms.Button()
+        Me.lblError = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'LstP1
@@ -95,6 +96,7 @@ Partial Class Form1
         '
         Me.lstSuits.FormattingEnabled = True
         Me.lstSuits.ItemHeight = 20
+        Me.lstSuits.Items.AddRange(New Object() {"Hearts", "Diamonds", "Clubs", "Spades"})
         Me.lstSuits.Location = New System.Drawing.Point(391, 64)
         Me.lstSuits.Name = "lstSuits"
         Me.lstSuits.Size = New System.Drawing.Size(268, 184)
@@ -172,11 +174,22 @@ Partial Class Form1
         Me.btnP2Pass.Text = "Pass"
         Me.btnP2Pass.UseVisualStyleBackColor = True
         '
-        'Form1
+        'lblError
+        '
+        Me.lblError.AutoSize = True
+        Me.lblError.Location = New System.Drawing.Point(391, 292)
+        Me.lblError.Name = "lblError"
+        Me.lblError.Size = New System.Drawing.Size(57, 20)
+        Me.lblError.TabIndex = 16
+        Me.lblError.Text = "Label1"
+        Me.lblError.Visible = False
+        '
+        'CrazyEights
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1056, 556)
+        Me.ClientSize = New System.Drawing.Size(1057, 556)
+        Me.Controls.Add(Me.lblError)
         Me.Controls.Add(Me.btnP2Pass)
         Me.Controls.Add(Me.BtnP1Pass)
         Me.Controls.Add(Me.btnNextPlayer)
@@ -192,8 +205,8 @@ Partial Class Form1
         Me.Controls.Add(Me.lstP2)
         Me.Controls.Add(Me.lblP1Hand)
         Me.Controls.Add(Me.LstP1)
-        Me.Name = "Form1"
-        Me.Text = "Form1"
+        Me.Name = "CrazyEights"
+        Me.Text = "Crazy Eights"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -213,5 +226,6 @@ Partial Class Form1
     Friend WithEvents btnNextPlayer As System.Windows.Forms.Button
     Friend WithEvents BtnP1Pass As System.Windows.Forms.Button
     Friend WithEvents btnP2Pass As System.Windows.Forms.Button
+    Friend WithEvents lblError As System.Windows.Forms.Label
 
 End Class
